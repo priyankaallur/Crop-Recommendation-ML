@@ -5,6 +5,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 import pickle
+import os
 
 # Load dataset
 data = pd.read_csv("dataset/Crop_recommendation.csv")
@@ -65,6 +66,9 @@ best_model, best_accuracy = models[best_model_name]
 
 print(f"\nBest Model: {best_model_name} with {best_accuracy * 100:.2f}% accuracy")
 print("="*60)
+
+# Ensure model directory exists
+os.makedirs("model", exist_ok=True)
 
 # Save best model
 with open("model/crop_model.pkl", "wb") as f:
