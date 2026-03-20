@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CropSense — AI Crop Recommendation</title>
-  <meta name="description" content="Enter your soil and climate data to get an AI-powered crop recommendation instantly." />
+  <title>CropSense — Compare Models</title>
+  <meta name="description" content="Compare crop predictions across all trained ML models side by side." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -38,7 +38,6 @@
       overflow-x: hidden;
     }
 
-    /* ── animated background blobs ── */
     body::before, body::after {
       content: '';
       position: fixed;
@@ -51,17 +50,17 @@
     body::before {
       width: 600px; height: 600px;
       background: radial-gradient(circle, #27ae60, transparent);
-      top: -200px; left: -200px;
+      top: -200px; right: -200px;
       animation: blob1 12s ease-in-out infinite alternate;
     }
     body::after {
       width: 500px; height: 500px;
       background: radial-gradient(circle, #1a5276, transparent);
-      bottom: -150px; right: -150px;
+      bottom: -150px; left: -150px;
       animation: blob2 15s ease-in-out infinite alternate;
     }
-    @keyframes blob1 { to { transform: translate(80px, 60px) scale(1.15); } }
-    @keyframes blob2 { to { transform: translate(-60px, -80px) scale(1.2); } }
+    @keyframes blob1 { to { transform: translate(-60px, 50px) scale(1.15); } }
+    @keyframes blob2 { to { transform: translate(60px, -60px) scale(1.2); } }
 
     /* ── NAV ── */
     nav {
@@ -74,19 +73,15 @@
     }
     .nav-logo {
       display: flex; align-items: center; gap: 10px;
-      font-size: 1.25rem; font-weight: 800; letter-spacing: -0.3px;
-      color: var(--accent);
-      text-decoration: none;
+      font-size: 1.25rem; font-weight: 800;
+      color: var(--accent); text-decoration: none;
     }
     .nav-logo span { font-size: 1.6rem; }
     .nav-links { display: flex; gap: 8px; }
     .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 8px 18px;
-      border-radius: 50px;
-      font-size: 0.875rem;
-      font-weight: 500;
+      color: var(--text-muted); text-decoration: none;
+      padding: 8px 18px; border-radius: 50px;
+      font-size: 0.875rem; font-weight: 500;
       transition: all 0.25s;
     }
     .nav-links a:hover, .nav-links a.active {
@@ -96,10 +91,10 @@
     }
     .nav-links a.active { color: var(--accent); }
 
-    /* ── MAIN LAYOUT ── */
+    /* ── MAIN ── */
     main {
       position: relative; z-index: 1;
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 48px 24px 80px;
     }
@@ -111,34 +106,23 @@
       background: rgba(82,190,128,0.15);
       border: 1px solid rgba(82,190,128,0.3);
       color: var(--accent);
-      padding: 6px 16px;
-      border-radius: 50px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
+      padding: 6px 16px; border-radius: 50px;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.5px; text-transform: uppercase;
       margin-bottom: 18px;
     }
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.5px;
-      margin-bottom: 14px;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; letter-spacing: -0.5px;
+      margin-bottom: 12px;
       background: linear-gradient(135deg, #fff 40%, var(--accent) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .hero p {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      max-width: 520px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
+    .hero p { font-size: 1rem; color: var(--text-muted); max-width: 500px; margin: 0 auto; line-height: 1.7; }
 
-    /* ── GLASS CARD ── */
+    /* ── CARD ── */
     .card {
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
@@ -146,47 +130,22 @@
       padding: 40px;
       backdrop-filter: blur(20px);
       box-shadow: var(--shadow);
+      margin-bottom: 36px;
     }
 
-    /* ── FORM GRID ── */
+    /* ── FORM ── */
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 18px;
       margin-bottom: 28px;
     }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-    .field label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .field .hint {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      margin-top: -4px;
-    }
-    .input-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-    .input-wrap .unit-badge {
-      position: absolute;
-      right: 12px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: rgba(82,190,128,0.7);
-      pointer-events: none;
-    }
-    .field input {
+    .field { display: flex; flex-direction: column; gap: 7px; }
+    .field label { font-size: 0.8rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; }
+    .field .hint  { font-size: 0.72rem; color: var(--text-muted); margin-top: -4px; }
+    .input-wrap   { position: relative; display: flex; align-items: center; }
+    .unit-badge   { position: absolute; right: 12px; font-size: 0.72rem; font-weight: 600; color: rgba(82,190,128,0.7); pointer-events: none; }
+    .field input  {
       width: 100%;
       background: var(--input-bg);
       border: 1px solid var(--glass-border);
@@ -195,160 +154,142 @@
       color: var(--text-main);
       font-size: 0.95rem;
       font-family: 'Inter', sans-serif;
-      transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+      transition: border-color 0.25s, box-shadow 0.25s;
       outline: none;
     }
-    .field input:focus {
-      border-color: var(--accent);
-      background: rgba(82,190,128,0.08);
-      box-shadow: 0 0 0 3px rgba(82,190,128,0.15);
-    }
+    .field input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(82,190,128,0.15); background: rgba(82,190,128,0.08); }
     .field input::placeholder { color: var(--text-muted); }
     .field input.invalid { border-color: var(--red); box-shadow: 0 0 0 3px rgba(231,76,60,0.15); }
 
-    /* ── ERRORS ── */
+    /* ── ERROR ── */
     .error-box {
       background: rgba(231,76,60,0.1);
       border: 1px solid rgba(231,76,60,0.35);
-      border-radius: 14px;
-      padding: 18px 22px;
-      margin-bottom: 22px;
+      border-radius: 14px; padding: 18px 22px; margin-bottom: 22px;
     }
     .error-box p { font-size: 0.85rem; font-weight: 600; color: #e74c3c; margin-bottom: 8px; }
     .error-box ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-    .error-box ul li {
-      font-size: 0.82rem;
-      color: #e98080;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .error-box ul li::before { content: "✕"; font-weight: 700; color: #e74c3c; }
+    .error-box li { font-size: 0.82rem; color: #e98080; display: flex; align-items: center; gap: 8px; }
+    .error-box li::before { content: "✕"; font-weight: 700; color: #e74c3c; }
 
-    /* ── SUBMIT BTN ── */
-    .btn-predict {
-      width: 100%;
-      padding: 16px;
+    /* ── BTN ── */
+    .btn-compare {
+      width: 100%; padding: 16px;
       background: linear-gradient(135deg, var(--green-light), var(--green-glow));
-      color: #fff;
-      font-size: 1rem;
-      font-weight: 700;
+      color: #fff; font-size: 1rem; font-weight: 700;
       font-family: 'Inter', sans-serif;
-      border: none;
-      border-radius: 14px;
-      cursor: pointer;
+      border: none; border-radius: 14px; cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
       box-shadow: 0 6px 24px rgba(39,174,96,0.4);
-      letter-spacing: 0.3px;
     }
-    .btn-predict:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 32px rgba(39,174,96,0.55);
-    }
-    .btn-predict:active { transform: translateY(0); }
+    .btn-compare:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(39,174,96,0.55); }
+    .btn-compare:active { transform: translateY(0); }
 
-    /* ── RESULT CARD ── */
-    .result-card {
-      margin-top: 32px;
-      background: linear-gradient(135deg, rgba(39,174,96,0.12), rgba(30,132,73,0.08));
-      border: 1px solid rgba(82,190,128,0.3);
-      border-radius: 20px;
-      padding: 32px;
-      text-align: center;
-      animation: fadeSlideUp 0.5s ease both;
+    /* ── RESULTS SECTION ── */
+    .section-title {
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
     }
+    .section-title::after {
+      content: ''; flex: 1; height: 1px;
+      background: var(--glass-border);
+    }
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .model-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 28px 24px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeSlideUp 0.5s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+    .model-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+    }
+    .model-card.best {
+      border-color: rgba(240,180,41,0.5);
+      background: rgba(240,180,41,0.06);
+    }
+    .model-card.best::before {
+      content: '★ BEST';
+      position: absolute; top: 12px; right: 12px;
+      font-size: 0.65rem; font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--gold);
+      background: rgba(240,180,41,0.15);
+      border: 1px solid rgba(240,180,41,0.35);
+      padding: 3px 8px; border-radius: 50px;
+    }
+
     @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .result-label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-    .crop-emoji { font-size: 4rem; line-height: 1; margin: 10px 0; }
-    .crop-name {
-      font-size: 2.2rem;
-      font-weight: 800;
-      text-transform: capitalize;
+    .model-card:nth-child(2) { animation-delay: 0.1s; }
+    .model-card:nth-child(3) { animation-delay: 0.2s; }
+
+    .model-name { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .model-emoji { font-size: 3rem; line-height: 1; margin: 6px 0; }
+    .model-crop {
+      font-size: 1.6rem; font-weight: 800; text-transform: capitalize; margin: 8px 0;
       background: linear-gradient(135deg, #fff 30%, var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: -0.5px;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .model-card.best .model-crop {
+      background: linear-gradient(135deg, #fff 30%, var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
-    /* confidence bar */
-    .confidence-wrap { margin-top: 20px; }
-    .confidence-wrap .conf-label {
-      font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px;
-      display: flex; justify-content: space-between;
-    }
-    .conf-bar-bg {
-      width: 100%; height: 8px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 50px; overflow: hidden;
-    }
-    .conf-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--green-light), var(--accent));
-      border-radius: 50px;
-      transition: width 1s ease;
-      animation: barGrow 1s ease both;
-    }
-    @keyframes barGrow { from { width: 0 !important; } }
-
-    .compare-link {
-      display: inline-block;
-      margin-top: 18px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-decoration: none;
+    /* stats */
+    .model-stats { display: flex; gap: 12px; margin-top: 18px; justify-content: center; }
+    .stat-pill {
+      display: flex; flex-direction: column; align-items: center;
+      background: rgba(255,255,255,0.07);
       border: 1px solid var(--glass-border);
-      padding: 8px 20px;
-      border-radius: 50px;
-      transition: all 0.25s;
+      border-radius: 12px; padding: 10px 18px;
+      flex: 1;
     }
-    .compare-link:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-      background: rgba(82,190,128,0.08);
-    }
+    .stat-pill .sv { font-size: 1.1rem; font-weight: 800; color: var(--accent); }
+    .model-card.best .stat-pill .sv { color: var(--gold); }
+    .stat-pill .sl { font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
 
-    /* ── API hint ── */
-    .api-hint {
-      margin-top: 36px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 24px 28px;
-    }
-    .api-hint h3 { font-size: 0.9rem; font-weight: 700; color: var(--accent); margin-bottom: 12px; }
-    .api-hint pre {
-      font-family: 'Courier New', monospace;
-      font-size: 0.78rem;
-      color: #a3d9a5;
-      background: rgba(0,0,0,0.3);
-      padding: 14px;
-      border-radius: 10px;
-      overflow-x: auto;
-      line-height: 1.6;
-    }
+    /* confidence bar inside card */
+    .mini-bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 50px; overflow: hidden; margin-top: 14px; }
+    .mini-bar-fill { height: 100%; border-radius: 50px; background: linear-gradient(90deg, var(--green-light), var(--accent)); }
+    .model-card.best .mini-bar-fill { background: linear-gradient(90deg, #d4ac0d, var(--gold)); }
 
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 24px;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      position: relative; z-index: 1;
+    /* Divider */
+    .divider { height: 1px; background: var(--glass-border); margin: 32px 0; }
+
+    /* ── Summary box ── */
+    .summary-box {
+      background: rgba(82,190,128,0.06);
+      border: 1px solid rgba(82,190,128,0.2);
+      border-radius: 16px; padding: 24px;
+      margin-top: 24px;
+      display: flex; align-items: center; gap: 16px;
     }
+    .summary-box .icon { font-size: 2.2rem; }
+    .summary-box .text h4 { font-size: 0.88rem; color: var(--accent); font-weight: 700; margin-bottom: 4px; }
+    .summary-box .text p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+    footer { text-align: center; padding: 24px; font-size: 0.78rem; color: var(--text-muted); position: relative; z-index: 1; }
 
     @media (max-width: 600px) {
       nav { padding: 14px 20px; }
-      main { padding: 32px 16px 60px; }
-      .card { padding: 28px 20px; }
+      .card { padding: 24px 18px; }
     }
   </style>
 </head>
@@ -357,29 +298,27 @@
   <nav>
     <a class="nav-logo" href="/"><span>🌿</span> CropSense</a>
     <div class="nav-links">
-      <a href="/" class="active">Predict</a>
-      <a href="/compare">Compare Models</a>
+      <a href="/">Predict</a>
+      <a href="/compare" class="active">Compare Models</a>
     </div>
   </nav>
 
   <main>
     <!-- Hero -->
     <div class="hero">
-      <div class="hero-badge"><span>✦</span> AI-Powered Agriculture</div>
-      <h1>Smart Crop Recommendation</h1>
-      <p>Enter your soil nutrients and climate conditions to receive an instant, data-driven crop suggestion from our trained ML model.</p>
+      <div class="hero-badge"><span>⚖️</span> Model Comparison</div>
+      <h1>Compare All ML Models</h1>
+      <p>See how Random Forest, KNN, and Logistic Regression each respond to the same soil and climate conditions.</p>
     </div>
 
-    <!-- Form Card -->
+    <!-- Input Form -->
     <div class="card">
-      <form method="POST" id="cropForm" novalidate>
+      <form method="POST" id="compareForm" novalidate>
 
         {% if error %}
         <div class="error-box">
           <p>⚠️ Please fix the following errors:</p>
-          <ul>
-            {% for e in error %}<li>{{ e }}</li>{% endfor %}
-          </ul>
+          <ul>{% for e in error %}<li>{{ e }}</li>{% endfor %}</ul>
         </div>
         {% endif %}
 
@@ -462,54 +401,72 @@
             </div>
           </div>
 
-        </div><!-- /form-grid -->
+        </div>
 
-        <button type="submit" class="btn-predict" id="predictBtn">
-          🔍 &nbsp;Get Crop Recommendation
+        <button type="submit" class="btn-compare" id="compareBtn">
+          ⚖️ &nbsp;Compare All Models
         </button>
       </form>
+    </div>
 
-      {% if result %}
-      <div class="result-card">
-        <div class="result-label">✦ AI Recommendation</div>
-        <div class="crop-emoji" id="cropEmoji"></div>
-        <div class="crop-name">{{ result }}</div>
+    {% if results %}
+    <!-- Results -->
+    <div class="card">
+      <div class="section-title">✦ Predictions by Model</div>
 
-        {% if confidence %}
-        <div class="confidence-wrap">
-          <div class="conf-label">
-            <span>Model Confidence</span>
-            <span>{{ confidence }}%</span>
+      {# best_name is passed from Python #}
+
+      <div class="models-grid">
+        {% for model_name, data in results.items() %}
+        <div class="model-card {% if model_name == best_name %}best{% endif %}" id="card-{{ loop.index }}">
+          <div class="model-name">{{ model_name }}</div>
+          <div class="model-emoji" data-crop="{{ data.crop | lower }}"></div>
+          <div class="model-crop">{{ data.crop }}</div>
+
+          <div class="model-stats">
+            <div class="stat-pill">
+              <span class="sv">{{ data.accuracy }}%</span>
+              <span class="sl">Accuracy</span>
+            </div>
+            {% if data.confidence %}
+            <div class="stat-pill">
+              <span class="sv">{{ data.confidence }}%</span>
+              <span class="sl">Confidence</span>
+            </div>
+            {% endif %}
           </div>
-          <div class="conf-bar-bg">
-            <div class="conf-bar-fill" style="width: {{ confidence }}%"></div>
+
+          {% if data.confidence %}
+          <div class="mini-bar-bg">
+            <div class="mini-bar-fill" style="width: {{ data.confidence }}%"></div>
           </div>
+          {% endif %}
         </div>
-        {% endif %}
-
-        <a class="compare-link" href="/compare">Compare across all models →</a>
+        {% endfor %}
       </div>
-      {% endif %}
 
-      <!-- API Hint -->
-      <div class="api-hint">
-        <h3>🔌 REST API Available</h3>
-        <pre>POST /api/predict
-Content-Type: application/json
-
-{
-  "N": 90, "P": 42, "K": 43,
-  "temperature": 20, "humidity": 82,
-  "ph": 6.5, "rainfall": 220
-}</pre>
+      <!-- Summary -->
+      {% set best_data = results[best_name] %}
+      <div class="summary-box">
+        <div class="icon">🏆</div>
+        <div class="text">
+          <h4>Best performing: {{ best_name }}</h4>
+          <p>
+            With <strong>{{ best_data.accuracy }}%</strong> training accuracy
+            {% if best_data.confidence %}and <strong>{{ best_data.confidence }}%</strong> prediction confidence{% endif %},
+            <strong>{{ best_name }}</strong> produced the recommendation:
+            <strong style="color:var(--gold); text-transform:capitalize;">{{ best_data.crop }}</strong>.
+          </p>
+        </div>
       </div>
-    </div><!-- /card -->
+    </div>
+    {% endif %}
+
   </main>
 
   <footer>© 2025 CropSense · AI-powered crop recommendation system</footer>
 
   <script>
-    // Crop emoji map
     const CROP_EMOJIS = {
       rice: "🌾", maize: "🌽", chickpea: "🫘", kidneybeans: "🫘",
       pigeonpeas: "🌿", mothbeans: "🌿", mungbean: "🌿", blackgram: "🌿",
@@ -519,32 +476,14 @@ Content-Type: application/json
       jute: "🌿", coffee: "☕"
     };
 
-    const cropName = "{{ result | lower if result else '' }}";
-    const emojiEl  = document.getElementById("cropEmoji");
-    if (emojiEl && cropName) {
-      emojiEl.textContent = CROP_EMOJIS[cropName] || "🌱";
-    }
-
-    // Highlight invalid fields based on server errors
-    const errorItems = document.querySelectorAll('.error-box li');
-    errorItems.forEach(li => {
-      const text = li.textContent.toLowerCase();
-      ['n','p','k','temperature','humidity','ph','rainfall'].forEach(field => {
-        const labels = { n:'nitrogen', p:'phosphorus', k:'potassium',
-                         temperature:'temperature', humidity:'humidity',
-                         ph:'ph', rainfall:'rainfall' };
-        if (text.includes(labels[field])) {
-          const el = document.getElementById(field.toUpperCase() === field ? field : field);
-          const inp = document.getElementById(field) || document.getElementById(field.toUpperCase());
-          if (inp) inp.classList.add('invalid');
-        }
-      });
+    document.querySelectorAll('[data-crop]').forEach(el => {
+      const c = el.getAttribute('data-crop');
+      el.textContent = CROP_EMOJIS[c] || "🌱";
     });
 
-    // Button loading state
-    document.getElementById('cropForm').addEventListener('submit', function() {
-      const btn = document.getElementById('predictBtn');
-      btn.textContent = '⏳  Analyzing…';
+    document.getElementById('compareForm').addEventListener('submit', function() {
+      const btn = document.getElementById('compareBtn');
+      btn.textContent = '⏳  Running models…';
       btn.disabled = true;
     });
   </script>
